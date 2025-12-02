@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Z-Image-Turbo Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎨 Z-Image-Turbo Generator</h1>
+        <p class="subtitle">Generate images with AI-powered diffusion models</p>
+      </header>
+
+      <div class="system-info-section">
+        <div class="info-card">
+          <h3>System Configuration</h3>
+          <div id="systemInfo" class="info-content">
+            <p class="loading-text">Loading system information...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="left-panel">
+          <form id="generationForm">
+            <div class="form-group">
+              <label for="prompt">Image Prompt</label>
+              <textarea
+                id="prompt"
+                name="prompt"
+                placeholder="Describe the image you want to generate..."
+                rows="6"
+                required
+              ></textarea>
+              <div class="char-count">
+                <span id="charCount">0</span> / 1000 characters
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="resolution">Resolution</label>
+              <select id="resolution" name="resolution">
+                <option value="128x128">128x128 (Fast)</option>
+                <option value="256x256">256x256 (Detailed)</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="numSteps">Inference Steps</label>
+                <div class="input-with-display">
+                  <input
+                    type="range"
+                    id="numSteps"
+                    name="num_steps"
+                    min="1"
+                    max="20"
+                    value="6"
+                  />
+                  <span id="stepsDisplay">6</span>
+                </div>
+                <small>More steps = better quality but slower</small>
+              </div>
+
+              <div class="form-group">
+                <label for="seed">Random Seed</label>
+                <input
+                  type="number"
+                  id="seed"
+                  name="seed"
+                  value="42"
+                  placeholder="0-2147483647"
+                />
+                <small>Same seed = same result</small>
+              </div>
+            </div>
+
+            <button type="submit" id="generateBtn" class="btn btn-primary">
+              <span class="btn-icon">✨</span>
+              Generate Image
+            </button>
+          </form>
+
+          <div class="examples">
+            <h3>Quick Prompts</h3>
+            <div class="example-buttons">
+              <button
+                class="example-btn"
+                onclick="fillPrompt('A serene mountain landscape with a crystal lake, sunset, golden hour lighting')"
+              >
+                Mountain Lake
+              </button>
+              <button
+                class="example-btn"
+                onclick="fillPrompt('A futuristic cyberpunk city with neon lights, flying cars, holographic billboards')"
+              >
+                Cyberpunk City
+              </button>
+              <button
+                class="example-btn"
+                onclick="fillPrompt('A cute cat wearing astronaut suit in space, stars, planets, colorful nebula')"
+              >
+                Space Cat
+              </button>
+              <button
+                class="example-btn"
+                onclick="fillPrompt('An ancient Japanese temple surrounded by cherry blossoms, moonlight, peaceful atmosphere')"
+              >
+                Japanese Temple
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="preview-container">
+            <div id="preview" class="preview">
+              <div class="placeholder">
+                <p>Generated image will appear here</p>
+              </div>
+            </div>
+
+            <div
+              id="loadingSpinner"
+              class="loading-spinner"
+              style="display: none"
+            >
+              <div class="spinner"></div>
+              <p>Generating image...</p>
+              <div id="progressInfo"></div>
+            </div>
+
+            <div id="downloadSection" style="display: none">
+              <button id="downloadBtn" class="btn btn-secondary">
+                ⬇️ Download Image
+              </button>
+              <button id="newGenerationBtn" class="btn btn-secondary">
+                ➕ Generate Another
+              </button>
+            </div>
+
+            <div id="errorMessage" style="display: none" class="error-message">
+              <p id="errorText"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Powered by <strong>Z-Image-Turbo</strong> |
+          <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo"
+            >Model Details</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
