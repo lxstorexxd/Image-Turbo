@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ## Изменить путь кэша 
 Если хотите сохранить в другое место, установите переменную окружения:
 ```
-$env:HF_HOME = "D:\Models"  # PowerShell
+$env:HF_HOME = "D:\Models"
 ```
 
 ## Запуск
@@ -171,5 +171,6 @@ Image-Turbo/
 
 - [Hugging Face Model Card](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo)
 - [Diffusers Documentation](https://huggingface.co/docs/diffusers)
+
 
 
